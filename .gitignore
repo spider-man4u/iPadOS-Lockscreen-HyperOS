@@ -5,6 +5,9 @@ release/
 __pycache__/
 *.pyc
 
+# Large system APK and proprietary native libs (packaged into release zip only)
+system/product/priv-app/MIUIAod/
+
 # Local system caches
 .DS_Store
 .idea/
