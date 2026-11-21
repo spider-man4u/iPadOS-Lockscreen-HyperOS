@@ -1,0 +1,36 @@
+{
+  "version": 4,
+  "homeInfo": {
+    "followStatus": 2,
+    "wallpaperInfo": {
+      "source": "sysui_editor_wallpaper_group/os3_classic/classic01.jpg",
+      "magicType": 0,
+      "resourceType": "image"
+    }
+  },
+  "lockscreenInfo": {
+    "clockInfo": {
+      "templateId": "all_in_one",
+      "clockEffect": 5,
+      "isAutoPrimaryColor": true,
+      "isAutoSecondaryColor": true,
+      "enableDiffusion": false,
+      "primaryColor": -1,
+      "secondaryColor": -1,
+      "style": 1,
+      "hollowStyle": 1,
+      "fontStyle": 21,
+      "clockWeight": 560,
+      "classicLine1": 103,
+      "isColonShow": true,
+      "glassTransparency": 0.15
+    },
+    "wallpaperInfo": {
+      "source": "sysui_editor_wallpaper_group/os3_classic/classic01.jpg",
+      "magicType": 0,
+      "resourceType": "image"
+    },
+    "templateName": "ipados_pad_style1",
+    "version": 4
+  }
+}

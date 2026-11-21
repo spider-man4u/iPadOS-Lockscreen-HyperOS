@@ -1,0 +1,11 @@
+# Build outputs
+release/
+*.zip
+*.apk.bak
+__pycache__/
+*.pyc
+
+# Local system caches
+.DS_Store
+.idea/
+.vscode/

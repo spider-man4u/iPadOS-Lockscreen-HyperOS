@@ -1,0 +1,2 @@
+# iPadOS Lockscreen system properties
+persist.sys.miui_animator_sched.enabled=true
