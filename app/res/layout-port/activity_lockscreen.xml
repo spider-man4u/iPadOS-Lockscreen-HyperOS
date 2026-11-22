@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Background Wallpaper Layer -->
+    <ImageView
+        android:id="@+id/wallpaper_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <!-- Filter Color Wash Overlay -->
+    <View
+        android:id="@+id/filter_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <!-- Tablet Portrait Layout (Centered Date + Clock + Horizontal Widget Row) -->
+    <LinearLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="90dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <!-- Date Capsule Box -->
+        <LinearLayout
+            android:id="@+id/date_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_date_box"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wed Apr 1"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Apple Clock Bounding Box -->
+        <FrameLayout
+            android:id="@+id/clock_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_clock_box"
+            android:paddingLeft="36dp"
+            android:paddingRight="36dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="16dp">
+            <TextView
+                android:id="@+id/tv_clock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9:41"
+                android:textColor="@color/apple_clock_cyan"
+                android:textSize="130sp"
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                android:gravity="center" />
+        </FrameLayout>
+
+        <!-- Horizontal Widget Tray (Portrait) -->
+        <LinearLayout
+            android:id="@+id/widget_column"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="340dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_widget_box"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+
+            <!-- "+ ADD WIDGETS" Pill (Interactive in edit mode) -->
+            <LinearLayout
+                android:id="@+id/btn_add_widgets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginEnd="10dp">
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_plus"
+                    android:tint="#E6FFFFFF"
+                    android:layout_marginEnd="6dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_widgets"
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Widget 1: Battery Widget -->
+            <LinearLayout
+                android:id="@+id/widget_battery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#20FFFFFF"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginEnd="8dp">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_battery"
+                    android:tint="#A3E7FC"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/tv_battery_pct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100%"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Widget 2: Weather Widget -->
+            <LinearLayout
+                android:id="@+id/widget_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#20FFFFFF"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginEnd="8dp">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_weather"
+                    android:tint="#FFF3A8"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/tv_weather_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="26°C"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_weather_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunny"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="11sp"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+
+            <!-- Widget 3: Calendar / Event Widget -->
+            <LinearLayout
+                android:id="@+id/widget_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#20FFFFFF"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_calendar"
+                    android:tint="#FFA6C9"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/tv_event_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Events"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Depth Effect Foreground Layer -->
+    <ImageView
+        android:id="@+id/depth_foreground_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
+    <!-- Top Bar Controls (Customizer Mode) -->
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingTop="28dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/bg_pill_button"
+            android:text="@string/cancel"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_pill_button_primary"
+            android:text="@string/add"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingLeft="22dp"
+            android:paddingRight="22dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp" />
+    </RelativeLayout>
+
+    <!-- Bottom Controls: Lockscreen Mode (Flashlight, Camera, Home Bar) -->
+    <RelativeLayout
+        android:id="@+id/lockscreen_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingBottom="24dp">
+
+        <!-- Flashlight Button -->
+        <FrameLayout
+            android:id="@+id/btn_flashlight"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_circle_frosted">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_flashlight"
+                android:tint="#FFFFFF" />
+        </FrameLayout>
+
+        <!-- Home Indicator + Swipe Hint -->
+        <LinearLayout
+            android:id="@+id/swipe_hint_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/tv_swipe_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/swipe_up"
+                android:textColor="#B3FFFFFF"
+                android:textSize="13sp"
+                android:layout_marginBottom="8dp" />
+            <View
+                android:layout_width="160dp"
+                android:layout_height="5dp"
+                android:background="@drawable/bg_home_bar" />
+        </LinearLayout>
+
+        <!-- Camera Button -->
+        <FrameLayout
+            android:id="@+id/btn_camera"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_circle_frosted">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_camera"
+                android:tint="#FFFFFF" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <!-- Bottom Controls: Customizer Mode (Filter Carousel & Action Buttons) -->
+    <RelativeLayout
+        android:id="@+id/customizer_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingBottom="28dp"
+        android:visibility="gone">
+
+        <!-- Center Filter Carousel (Natural, Studio, etc.) -->
+        <LinearLayout
+            android:id="@+id/filter_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/tv_filter_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/natural"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+            <!-- Pagination Dots -->
+            <LinearLayout
+                android:id="@+id/dots_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <View
+                    android:id="@+id/dot_0"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_dot_active" />
+                <View
+                    android:id="@+id/dot_1"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_dot_inactive" />
+                <View
+                    android:id="@+id/dot_2"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_dot_inactive" />
+                <View
+                    android:id="@+id/dot_3"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_dot_inactive" />
+                <View
+                    android:id="@+id/dot_4"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_dot_inactive" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Right Action Buttons (Wallpaper Picker, Depth Toggle, More) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <!-- Wallpaper Picker -->
+            <FrameLayout
+                android:id="@+id/btn_choose_wallpaper"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_circle_frosted"
+                android:layout_marginEnd="12dp">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_wallpaper"
+                    android:tint="#FFFFFF" />
+            </FrameLayout>
+
+            <!-- Depth Effect Toggle -->
+            <FrameLayout
+                android:id="@+id/btn_toggle_depth"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_circle_frosted"
+                android:layout_marginEnd="12dp">
+                <ImageView
+                    android:id="@+id/iv_depth_icon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_depth"
+                    android:tint="#FFFFFF" />
+            </FrameLayout>
+
+            <!-- More Options -->
+            <FrameLayout
+                android:id="@+id/btn_more_options"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_circle_frosted">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_more"
+                    android:tint="#FFFFFF" />
+            </FrameLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- Bottom Sheet Dialog: Font & Color Picker -->
+    <LinearLayout
+        android:id="@+id/font_color_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:background="@drawable/bg_sheet_bottom"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <!-- Top Drag Pill -->
+        <View
+            android:layout_width="36dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#60FFFFFF"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Font &amp; Color"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Font Style Horizontal Selector -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="16dp">
+            <LinearLayout
+                android:id="@+id/font_list_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Color Palette"
+            android:textColor="#B3FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Color Palette Horizontal Row -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="16dp">
+            <LinearLayout
+                android:id="@+id/color_palette_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Done Button for Sheet -->
+        <Button
+            android:id="@+id/btn_sheet_done"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:text="Done"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/bg_pill_button_primary" />
+    </LinearLayout>
+
+</FrameLayout>

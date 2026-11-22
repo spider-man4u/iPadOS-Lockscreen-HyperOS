@@ -16,4 +16,13 @@ MODDIR=${0%/*}
     case "$cur_show_mode" in
         ""|null) settings put secure aod_show_mode 0 ;;
     esac
+
+    # Ensure permissions for iPadOS Lockscreen standalone app
+    pm grant com.ipados.lockscreen android.permission.CAMERA 2>/dev/null
+    pm grant com.ipados.lockscreen android.permission.READ_EXTERNAL_STORAGE 2>/dev/null
+    pm grant com.ipados.lockscreen android.permission.SYSTEM_ALERT_WINDOW 2>/dev/null
+
+    # Launch iPadOS Lockscreen background service
+    am start-foreground-service -n com.ipados.lockscreen/.LockScreenService 2>/dev/null || \
+    am startservice -n com.ipados.lockscreen/.LockScreenService 2>/dev/null
 ) &

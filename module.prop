@@ -1,6 +1,6 @@
 id=ipados_lockscreen_tablet
 name=iPadOS Lockscreen - HyperOS Tablet Edition
-version=v1.0
-versionCode=10
+version=v1.1
+versionCode=11
 author=Spider, Antigravity
-description=Transforms HyperOS lockscreen into an authentic iPadOS-inspired lockscreen with Apple SF Pro typography, iPadOS clock templates, depth effect wallpapers, and tablet-optimized widget layouts. Cross-compatible with HyperOS 2, 3, and 4.
+description=Transforms HyperOS lockscreen into an authentic iPadOS lockscreen and interactive customizer. Includes Apple SF Pro typography, vertical widget tray (battery, weather, calendar), dynamic color tinting, bottom photo/depth controls, and privileged system lockscreen app. Cross-compatible with HyperOS 2, 3, and 4.

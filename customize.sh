@@ -82,6 +82,8 @@ if [ -d "$MODPATH/system/product/fonts" ]; then
     done
 fi
 
+ui_print "- Deploying iPadOS Lockscreen Standalone App & Customizer..."
+
 # --------------------------------------------------- Set Permissions
 ui_print "- Setting file permissions..."
 set_perm_recursive "$MODPATH" 0 0 0755 0644

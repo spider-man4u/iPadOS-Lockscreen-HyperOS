@@ -5,20 +5,35 @@
 [![Root](https://img.shields.io/badge/Root-KernelSU%20%7C%20Magisk%20%7C%20APatch-orange.svg)](#installation)
 [![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](LICENSE)
 
-An open-source, systemless modification that transforms the **Xiaomi / Redmi Tablet Lockscreen & Always-On Display** into an authentic **iPadOS-inspired experience** across **Xiaomi HyperOS 3, HyperOS 2, and HyperOS 4**.
+An open-source, systemless modification that transforms the **Xiaomi / Redmi Tablet Lockscreen & Always-On Display** into an authentic **1:1 iPadOS Lockscreen experience with interactive Customizer** across **Xiaomi HyperOS 3, HyperOS 2, and HyperOS 4**.
 
-Specifically tuned and verified for the **Redmi Pad Pro 5G / POCO Pad 5G (`ruan`)**, **Redmi Pad Pro Wi-Fi (`dizi`)**, and the **Xiaomi Pad series**.
+Specifically tuned and verified on the **Redmi Pad Pro 5G / POCO Pad 5G (`ruan`)**, **Redmi Pad Pro Wi-Fi (`dizi`)**, and **Xiaomi Pad series**.
 
 ---
 
-## ✨ Features
+## ✨ Features (v1.1)
 
-- **Apple SF Pro Typography**: Replaces lockscreen clock numerals with real **SF Pro Rounded Bold**, **SF Pro Text**, and **New York Serif**.
-- **iPadOS Centered Clock**: Large proportional clock layout with date header placed cleanly above the time (`SATURDAY, 21 NOVEMBER` format).
-- **Depth Effect Wallpapers**: Dual-layer subject segmentation with pre-rendered depth masks (`_mask.jpg`) allowing the clock to pass behind wallpaper subjects naturally.
-- **Horizontal Tablet Widget Shelf**: Tailored for 16:10 and 4:3 tablet screens, positioning battery rings, weather summaries, and calendar cards beneath the clock.
-- **Cross-Version Architecture**: Compatible with **HyperOS 3.0** (native), with graceful fallback support for **HyperOS 2.0** and forward compatibility for **HyperOS 4.0**.
-- **Signature Verification Bypassed**: Fully compatible with CorePatch and LSPosed frameworks.
+- **Interactive iPadOS Customizer**:
+  - Long-press lockscreen or open from app launcher to enter full customizer mode.
+  - Top `[Cancel]` and `[Add]` pill buttons.
+  - Interactive Date Capsule pill and massive Clock bounding box.
+  - **Font & Color Sheet**: 8 Apple color palette swatches with live preview tinting.
+- **Authentic Tablet Layouts**:
+  - **Landscape Mode**: Left vertical widget column with rounded outline and `+ ADD WIDGETS` pill, center-right date capsule and clock.
+  - **Portrait Mode**: Centered Date + Clock with horizontal rounded widget tray beneath the clock.
+- **Integrated Live Widgets**:
+  - **Battery Widget**: Real-time tablet battery percentage (`84% Pad Battery`).
+  - **Weather Widget**: Real-time ambient weather temperature and condition (`26°C Sunny`).
+  - **Calendar / Events**: Upcoming schedule or next system alarm.
+- **Lockscreen Controls & Gestures**:
+  - Frosted circular **Flashlight** button with instant LED torch toggle.
+  - Frosted circular **Camera** button.
+  - Bottom home indicator bar with smooth **Swipe up to unlock** physics.
+  - Filter styles: `Natural`, `Studio`, `Black & White`, `Color Wash`, and `Duotone` with pagination dots.
+- **Apple SF Pro Typography**: Authentic **SF-Pro-Rounded-Bold.ttf** and **SF-Pro-Text** embedded directly.
+- **Dual Architecture**:
+  - **Standalone Privileged System App** (`com.ipados.lockscreen` in `/system/priv-app/`).
+  - **Systemless AOD & Font Overlays** via KernelSU / Magisk / APatch.
 
 ---
 
@@ -30,11 +45,11 @@ Specifically tuned and verified for the **Redmi Pad Pro 5G / POCO Pad 5G (`ruan`
 | **Redmi Pad Pro (Wi-Fi)** | `dizi` | HyperOS 3.0, HOS 2.0 | Compatible ✅ |
 | **Xiaomi Pad 6 / 6 Pro / 6S Pro** | `pipa`, `liuqin`, `sheng` | HyperOS 1.0 - 3.0 | Compatible ✅ |
 | **Redmi Pad SE 8.7** | `xun` | HyperOS 2.0, 3.0 | Compatible ✅ |
-| **HyperOS Phones** | All | HyperOS 2.0 - 4.0 | Supported via auto-layout fallback |
+| **HyperOS Phones** | All | HyperOS 2.0 - 4.0 | Supported via responsive layout |
 
 ---
 
-## 🛠️ Architecture Overview
+## 🛠️ Architecture
 
 ```mermaid
 flowchart TD
@@ -42,17 +57,17 @@ flowchart TD
         A["KernelSU / Magisk / APatch"]
     end
 
-    subgraph "Module Systemless Layer"
-        B["system/product/fonts\n(Apple SF Pro / New York TTFs)"]
-        C["system/product/etc/device_features\n(Tablet AOD & Depth Unlocks)"]
-        D["system/product/media/wallpaper\n(iPadOS Depth Wallpapers & Masks)"]
-        E["system/product/overlay\n(DevicesAndroidOverlay.apk)"]
+    subgraph "Privileged System Layer"
+        B["/system/priv-app/iPadOSLockscreen/iPadOSLockscreen.apk"]
+        C["/system/etc/permissions/privapp-permissions-ipados.xml"]
+        D["/system/product/fonts/SF-Pro-Rounded-Bold.ttf"]
+        E["/system/product/etc/device_features/ruan.xml"]
     end
 
-    subgraph "Lockscreen Engine"
-        F["MIUIAod.apk\n(HyperOS Clock & Template Engine)"]
-        G["preset_clock_template_config.json\n(iPadOS All-in-One Clock Preset)"]
-        H["kg_ipados_pad_style1.json\n(Tablet Widget & Geometry Mapping)"]
+    subgraph "iPadOS Lockscreen Engine"
+        F["LockScreenActivity\n(ShowWhenLocked + Customizer + Gestures)"]
+        G["LockScreenService\n(Screen-Off / Screen-On Watchdog)"]
+        H["SettingsManager\n(Colors, Fonts, Filters & Widgets State)"]
     end
 
     A --> B
@@ -60,53 +75,35 @@ flowchart TD
     A --> D
     A --> E
     B --> F
-    C --> F
-    D --> F
-    G --> F
-    H --> F
+    B --> G
+    B --> H
 ```
 
 ---
 
 ## 🚀 Installation
 
-### Prerequisites
-1. Rooted with **KernelSU**, **Magisk**, or **APatch**.
-2. **Signature Verification Disabled** (via [CorePatch](https://github.com/LSPosed/CorePatch) LSPosed module or DisableApkVerification).
-
-### Flashing Guide
-1. Download the latest release from the [Releases](https://github.com/spider-man4u/iPadOS-Lockscreen-HyperOS/releases) tab (or build it locally using `tools/build_module.py`).
-2. Open **KernelSU** or **Magisk**.
-3. Navigate to **Modules** → **Install from storage**.
-4. Select `iPadOS_Lockscreen_HyperOS_v1.0.zip`.
-5. Reboot your device.
+1. Download `iPadOS_Lockscreen_HyperOS_v1.1.zip` from [Releases](https://github.com/spider-man4u/iPadOS-Lockscreen-HyperOS/releases).
+2. Open **KernelSU**, **Magisk**, or **APatch** app.
+3. Go to **Modules** → **Install from storage**.
+4. Select `iPadOS_Lockscreen_HyperOS_v1.1.zip`.
+5. Reboot your tablet.
 
 ---
 
-## 🧰 Developer Tools & Custom Builds
+## 💡 How to Customize
 
-All build and patching tools are written in standard Python 3 and can run directly on Termux on the tablet itself:
-
-```bash
-# 1. Package the flashable module ZIP
-python3 tools/build_module.py
-
-# 2. Patch a custom MIUIAod.apk with iPadOS templates
-python3 tools/patch_aod.py /path/to/MIUIAod.apk /path/to/output_MIUIAod.apk
-```
+- **Enter Customizer Mode**: Long-press anywhere on the lock screen, or open the **iPadOS Lockscreen** app from your home screen.
+- **Change Clock Color**: Tap the clock bounding box to open the **Font & Color Sheet**, then select your preferred hue.
+- **Switch Wallpapers**: Tap the wallpaper icon in the bottom right to toggle presets, or long-press it to select any photo from your gallery.
+- **Toggle Filters**: Tap the filter name (`Natural`) at the bottom to cycle through photo styles.
+- **Save**: Tap **`[Add]`** in the top right to save and activate your setup.
 
 ---
 
-## 🤝 Credits & Acknowledgements
+## 📜 Credits & License
 
-- **Spider** ([@spider-man4u](https://github.com/spider-man4u)) — Creator & HyperOS tablet maintainer
-- **Antigravity** — System architecture & Python automated toolchain
-- **Mods Center & Kashi** — Foundation AOD research & unlocking techniques
-- **BlassGO** — Dynamic Installer framework
-- **Apple Inc.** — Design inspiration (iPadOS Lockscreen UI & SF Pro typography)
-
----
-
-## 📄 License
-
-Licensed under the [Apache License, Version 2.0](LICENSE).
+- **Lead Developer**: [Spider](https://github.com/spider-man4u)
+- **Co-Developer**: Antigravity
+- **Typography**: Apple SF Pro (Cupertino)
+- **License**: Apache 2.0

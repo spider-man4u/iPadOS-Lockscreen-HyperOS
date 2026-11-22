@@ -12,3 +12,8 @@ system/product/priv-app/MIUIAod/
 .DS_Store
 .idea/
 .vscode/
+
+# App build temporaries
+app/obj/
+app/unsigned.apk
+app/classes.dex

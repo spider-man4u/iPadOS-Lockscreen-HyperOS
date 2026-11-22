@@ -12,7 +12,7 @@ import shutil
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RELEASE_DIR = os.path.join(PROJECT_DIR, "release")
-ZIP_NAME = "iPadOS_Lockscreen_HyperOS_v1.0.zip"
+ZIP_NAME = "iPadOS_Lockscreen_HyperOS_v1.1.zip"
 ZIP_OUTPUT = os.path.join(RELEASE_DIR, ZIP_NAME)
 SDCARD_DOWNLOAD = "/sdcard/Download"
 
